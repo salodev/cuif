@@ -8,7 +8,7 @@ class AlertWindow extends Window {
 		$this->setToolKeys(array(
 			'<ENTER>, <ESCAPE>' => 'Close',
 		));
-		$this->keyPress('keyPress', function(Input $input) {
+		$this->bind('keyPress', function(Input $input) {
 			$spec = $input->spec;
 			if ($spec=='ESCAPE'||$spec=='RETURN') {
 				$this->close();

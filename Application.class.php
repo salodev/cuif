@@ -139,7 +139,7 @@ abstract class Application {
 	
 	public function alertWindow($title, $text, callable $onClose = null) {
 		$window = $this->openWindow('\cuif\AlertWindow', array(
-			'title' => $text,
+			'title' => $title,
 			'text' => $text,
 		));
 		if ($onClose !== null) {
