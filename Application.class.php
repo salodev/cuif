@@ -137,7 +137,18 @@ abstract class Application {
 		$window->moveToTop();
 	}
 	
-	public function confirmWindow($text, $onConfirm = null, $onCancel = null) {
+	public function alertWindow($title, $text, callable $onClose = null) {
+		$window = $this->openWindow('\cuif\AlertWindow', array(
+			'title' => $text,
+			'text' => $text,
+		));
+		if ($onClose !== null) {
+			$window->bind('close', $onClose);
+		}
+		return $window;
+	}
+	
+	public function confirmWindow($text, callable $onConfirm = null, callable $onCancel = null) {
 		$window = $this->openWindow('\cuif\ConfirmWindow', array(
 			'text' => $text,
 		));
