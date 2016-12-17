@@ -9,8 +9,8 @@ class CUIF {
 		self::$keyDebug = $keyDebug;
 		if (self::$_firstTimeExecuion) {
 			register_shutdown_function(function() {
-				Console::ShowCursorStatic();
 				system("stty sane;stty echo");
+				Console::ShowCursor();
 			});
 			self::$_firstTimeExecuion = false;
 		}
