@@ -90,14 +90,19 @@ abstract class VisualObject {
 		$this->_eventsHandler->addListener($eventName, $eventListener, $persistent);
 	}
 	
-	public function keyPress($keySpec, $eventListener, $persistent = true) {
-		$this->bind('keyPress', function(Input $input) use ($keySpec, $eventListener) {
-			if ($input->spec===$keySpec) {
-				$eventListener($input);
-			} elseif ($input->raw===$keySpec) {
-				$eventListener($input);
-			}
-		}, $persistent);
+	public function keyPress($keySpecs, $eventListener, $persistent = true) {
+		if (!is_array($keySpecs)) {
+			$keySpecs = explode('|', $keySpecs);
+		}
+		foreach($keySpecs as $keySpec) {
+			$this->bind('keyPress', function(Input $input) use ($keySpec, $eventListener) {
+				if ($input->spec===$keySpec) {
+					$eventListener($input);
+				} elseif ($input->raw===$keySpec) {
+					$eventListener($input);
+				}
+			}, $persistent);
+		}
 	}
     
     public function init(array $params = array()) {}
