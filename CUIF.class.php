@@ -48,7 +48,7 @@ class CUIF {
 		}, false);
 		$application->main();
 		if (!Worker::IsRunning()) {
-			Worker::Start(1, function(\Exception $e, $taskInfo) use ($application) {
+			Worker::Start(100, function(\Exception $e, $taskInfo) use ($application) {
 				$application->openWindow('\cuif\ExceptionWindow', array(
 					'exception' => $e,
 					'taskInfo'  => $taskInfo,
